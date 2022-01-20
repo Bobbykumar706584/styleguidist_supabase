@@ -1,3 +1,4 @@
-export {default as HelloName} from './hello-name';
-export {default as HelloNamesUl} from './hello-names-ul';
-export {default as HelloNamesList} from './hello-names-list';
+export { default as AddUser } from "./add-user";
+export { default as SnackBar } from "./snack-bar";
+export { default as UsersTable } from "./users-table";
+export { default as DeleteUser } from "./delete-user";
