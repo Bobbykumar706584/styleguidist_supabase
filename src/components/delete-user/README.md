@@ -11,6 +11,8 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import DeleteUser from "./DeleteUser";
+import IconButton from "@material-ui/core/IconButton";
+import RefreshIcon from "@material-ui/icons/Refresh";
 import { supabase } from "../../supabaseClient";
 
 const useStyles = makeStyles((theme) => ({
@@ -54,6 +56,9 @@ async function fetchUsers() {
       ))}
     </Select>
   </FormControl>
+  <IconButton aria-label="refresh" onClick={fetchUsers}>
+    <RefreshIcon />
+  </IconButton>
   <DeleteUser userId={userId} handleDelete={fetchUsers} />
 </>;
 ```

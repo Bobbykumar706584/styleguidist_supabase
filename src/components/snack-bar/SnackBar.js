@@ -5,6 +5,7 @@ import Alert from "@material-ui/lab/Alert";
 
 export default function SnackBar(props) {
   const { responseStatus, handleClose } = props;
+  console.log(responseStatus);
 
   return (
     <Snackbar

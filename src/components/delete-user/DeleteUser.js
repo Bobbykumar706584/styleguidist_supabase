@@ -12,7 +12,6 @@ const DeleteUser = (props) => {
     setResponseStatus([true, "success", "Deleted User"]);
     handleDelete();
     handleClose();
-    window.location.reload(false);
   }
 
   return (

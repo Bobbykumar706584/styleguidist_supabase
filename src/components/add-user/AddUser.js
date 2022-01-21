@@ -107,14 +107,13 @@ const AddUser = (props) => {
     fetchUsers();
     setResponseStatus([true, "success", "Success message"]);
     handleClose();
-    window.location.reload(false);
   }
 
   return (
     <>
       <Modal
         open={showModal}
-        onClose={props.handleClose}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -124,7 +123,7 @@ const AddUser = (props) => {
               <h3 className={classes.title}>Create user</h3>
             </Grid>
             <Grid item xs={1} className={classes.closeBox}>
-              <span className={classes.closeButton} onClick={props.handleClose}>
+              <span className={classes.closeButton} onClick={handleClose}>
                 x
               </span>
             </Grid>
@@ -229,7 +228,7 @@ const AddUser = (props) => {
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={props.handleClose}
+                onClick={handleClose}
               >
                 Cancel
               </Button>

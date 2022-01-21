@@ -10,7 +10,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-
+import IconButton from "@material-ui/core/IconButton";
+import RefreshIcon from "@material-ui/icons/Refresh";
 import { supabase } from "../../supabaseClient";
 import UpdateUser from "./UpdateUser";
 
@@ -60,6 +61,9 @@ const findUser = (userId) => {
       ))}
     </Select>
   </FormControl>
+  <IconButton aria-label="refresh" onClick={fetchUsers}>
+    <RefreshIcon />
+  </IconButton>
   <UpdateUser user={findUser(userId)} handleUpdate={fetchUsers} />
 </>;
 ```
