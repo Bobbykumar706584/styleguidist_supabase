@@ -18,6 +18,10 @@ let sections = [
         "delete-user",
         "update-user",
         "snack-bar",
+        "add-post",
+        "posts-table",
+        "delete-post",
+        "update-post",
       ];
       return componentNames.map((componentName) => {
         const filename = upperFirst(camelCase(componentName));

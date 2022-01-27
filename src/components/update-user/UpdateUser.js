@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 const UpdateUser = (props) => {
   const classes = useStyles();
-  const { handleClose, user, handleUpdate } = props;
+  const { user, handleUpdate } = props;
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [responseStatus, setResponseStatus] = useState([false]);
   const [name, setName] = useState("");
@@ -115,8 +115,13 @@ const UpdateUser = (props) => {
     setResponseStatus([true, "success", "Updated User"]);
     handleUpdate();
     setShowUpdateModal(false);
-    window.location.reload(false);
   }
+  const alertClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setResponseStatus([false]);
+  };
 
   return (
     <>
@@ -262,7 +267,7 @@ const UpdateUser = (props) => {
           </Grid>
         </form>
       </Modal>
-      <SnackBar responseStatus={responseStatus} handleClose={handleClose} />
+      <SnackBar responseStatus={responseStatus} handleClose={alertClose} />
     </>
   );
 };

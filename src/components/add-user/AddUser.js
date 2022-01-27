@@ -94,6 +94,13 @@ const AddUser = (props) => {
     return true;
   };
 
+  const alertClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setResponseStatus([false]);
+  };
+
   async function createUser() {
     if (!validForm()) {
       return false;
@@ -244,7 +251,7 @@ const AddUser = (props) => {
           </Grid>
         </form>
       </Modal>
-      <SnackBar responseStatus={responseStatus} handleClose={handleClose} />
+      <SnackBar responseStatus={responseStatus} handleClose={alertClose} />
     </>
   );
 };

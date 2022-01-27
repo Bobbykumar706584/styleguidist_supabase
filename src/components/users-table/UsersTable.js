@@ -1,6 +1,6 @@
 import UsersTable from "./UsersTable";
 
-const Table = () => {
+const UserTable = () => {
   return (
     <>
       <UsersTable />
@@ -8,4 +8,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default UserTable;

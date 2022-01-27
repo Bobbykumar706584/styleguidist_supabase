@@ -3,29 +3,27 @@ import { Button } from "@material-ui/core";
 import SnackBar from "../snack-bar/SnackBar";
 import { supabase } from "../../supabaseClient";
 
-const DeleteUser = (props) => {
-  const { userId, fetchUsers } = props;
+const DeletePost = (props) => {
+  const { userId, fetchPosts } = props;
   const [responseStatus, setResponseStatus] = useState([false]);
 
-  async function deleteUser(id) {
-    await supabase.from("users").delete().eq("id", id);
+  async function deletePost(id) {
+    await supabase.from("posts").delete().eq("id", id);
     setResponseStatus([true, "success", "Deleted User"]);
-    fetchUsers();
+    fetchPosts();
   }
-
   const alertClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
     setResponseStatus([false]);
   };
-
   return (
     <>
       <Button
         variant="contained"
         color="secondary"
-        onClick={() => deleteUser(userId)}
+        onClick={() => deletePost(userId)}
       >
         Delete
       </Button>
@@ -33,5 +31,4 @@ const DeleteUser = (props) => {
     </>
   );
 };
-
-export default DeleteUser;
+export default DeletePost;

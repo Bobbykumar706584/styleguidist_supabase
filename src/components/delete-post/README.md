@@ -1,6 +1,6 @@
-### User delete Example
+### Post delete Example
 
-Demo for User delete
+Demo for Post delete
 
 ```js
 import React, { useState, useEffect } from "react";
@@ -10,7 +10,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import DeleteUser from "./DeleteUser";
+import DeletePost from "./DeletePost";
 import IconButton from "@material-ui/core/IconButton";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import { supabase } from "../../supabaseClient";
@@ -22,22 +22,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const classes = useStyles();
-const [users, setUsers] = useState([]);
+const [posts, setPosts] = useState([]);
 const [userId, setUserId] = useState("");
+const [users, setUsers] = useState(null);
+const [userSearch, setUserSearch] = useState(null);
 
 const handleChange = (event) => {
   setUserId(event.target.value);
 };
 
 useEffect(() => {
-  fetchUsers();
+  fetchPosts();
+  userdropdown();
 }, []);
 
-async function fetchUsers() {
-  const { data } = await supabase.from("users").select();
+async function fetchPosts() {
+  const { data } = await supabase.from("posts").select();
   data.sort((a, b) => a.id - b.id);
-  setUsers(data);
+  setPosts(data);
 }
+
+async function userdropdown() {
+  const { data } = await supabase.from("users").select();
+  const arr = [];
+  data.map((item) => {
+    const obj = {
+      value: item.id,
+      label: item.username,
+    };
+    arr.push(obj);
+  });
+  setUsers(arr);
+}
+const findUser = (userId) => {
+  return users.find((user) => user.id === userId) || {};
+};
 
 <>
   <FormControl variant="outlined" className={classes.formControl}>
@@ -49,16 +68,18 @@ async function fetchUsers() {
       onChange={handleChange}
       label="Username"
     >
-      {users.map((user) => (
-        <MenuItem value={user.id} key={user.id}>
-          {user.username}
-        </MenuItem>
-      ))}
+      {posts &&
+        users &&
+        posts.filter(findUser).map((item) => (
+          <MenuItem value={item.id} key={item.id}>
+            {users.find((a) => a.value === item.user_id).label}
+          </MenuItem>
+        ))}
     </Select>
   </FormControl>
-  <IconButton aria-label="refresh" onClick={fetchUsers}>
+  <IconButton aria-label="refresh" onClick={fetchPosts}>
     <RefreshIcon />
   </IconButton>
-  <DeleteUser userId={userId} fetchUsers={fetchUsers} />
+  <DeletePost userId={userId} fetchPosts={fetchPosts} />
 </>;
 ```
